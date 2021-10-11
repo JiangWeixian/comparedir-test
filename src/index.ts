@@ -11,7 +11,7 @@ import { toMatchFile } from 'jest-file-snapshot'
  */
 export const compare = async (input: string, target: string, _options?: any) => {
   if ('expect' in global) {
-    expect.extend({ toMatchFile });
+    expect.extend({ toMatchFile })
   }
   const [inputFiles, targetFiles] = await Promise.all(
     [input, target].map((cwd) => {
@@ -35,7 +35,7 @@ export const compare = async (input: string, target: string, _options?: any) => 
     const inputBuffer = fs.readFileSync(path.resolve(input, inputFilePath))
     const targetBuffer = fs.readFileSync(targetFilePath)
     if ('expect' in global) {
-      expect(inputBuffer.toString()).toMatchFile(targetFilePath);
+      expect(inputBuffer.toString()).toMatchFile(targetFilePath)
     }
     if (!inputBuffer.equals(targetBuffer)) {
       return false

@@ -1,0 +1,6 @@
+{
+  "extends": ["@aiou"],
+  "env": {
+    "jest": true
+  }
+}
