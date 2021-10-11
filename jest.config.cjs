@@ -1,5 +1,3 @@
-const { jsWithTsESM: ts } = require('ts-jest/presets')
-
 /**
  * @type {import('@jest/types').Config.InitialOptions}
  */
@@ -20,10 +18,6 @@ module.exports = {
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
   },
-  // transform: {
-  //   ...ts.transform,
-  // },
-  // transformIgnorePatterns: ['node_modules/!globby'],
   roots: ['<rootDir>/test'],
   moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node'],
   testRegex: '/test/.+\\.test\\.jsx?$',

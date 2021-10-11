@@ -1,15 +1,14 @@
 {
   "name": "comparedir",
-  "version": "1.7.8",
+  "version": "0.0.0",
   "license": "MIT",
-  "homepage": "https://github.com/JiangWeixian/templates#readme",
+  "homepage": "https://github.com/JiangWeixian/comparedir#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JiangWeixian/templates",
-    "directory": "packages/comparedir"
+    "url": "https://github.com/JiangWeixian/comparedir"
   },
   "bugs": {
-    "url": "https://github.com/JiangWeixian/templates/issues",
+    "url": "https://github.com/JiangWeixian/comparedir/issues",
     "email": "jiangweixian1994@gmail.com"
   },
   "author": "JW <jiangweixian1994@gmail.com> (https://twitter.com/jiangweixian)",
@@ -68,14 +67,6 @@
   "config": {
     "commitizen": {
       "path": "cz-emoji"
-    }
-  },
-  "ava": {
-    "typescript": {
-      "compile": "tsc",
-      "rewritePaths": {
-        "src/": "build/"
-      }
     }
   }
 }
