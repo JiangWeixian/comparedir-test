@@ -23,7 +23,7 @@ it('file content not match should return false', async () => {
 
 <div align='center'>
 
-![files-count](./snapshots/files-count.png)  
+![files-count](https://github.com/JiangWeixian/comparedir-test/blob/master/snapshots/files-count.png?raw=true)  
 *▲ files-count*
 
 </div>
@@ -42,7 +42,7 @@ it('file content&count match should return true', async () => {
 
 <div align='center'>
 
-![files-content](./snapshots/files-content.png)  
+![files-content](https://github.com/JiangWeixian/comparedir-test/blob/master/snapshots/files-content.png?raw=true)  
 *▲ files-content*
 
 </div>
