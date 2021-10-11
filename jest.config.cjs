@@ -1,22 +1,31 @@
+const { jsWithTsESM: ts } = require('ts-jest/presets')
+
+/**
+ * @type {import('@jest/types').Config.InitialOptions}
+ */
 module.exports = {
   cacheDirectory: './jest/cache',
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*'],
   coverageDirectory: './jest/coverage',
-  preset: 'ts-jest',
   resetMocks: true,
   resetModules: true,
   restoreMocks: true,
   globals: {
     'ts-jest': {
       diagnostics: false,
+      useESM: true,
     },
   },
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
   },
+  // transform: {
+  //   ...ts.transform,
+  // },
+  // transformIgnorePatterns: ['node_modules/!globby'],
   roots: ['<rootDir>/test'],
   moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node'],
-  testRegex: '/test/.+\\.test\\.tsx?$',
+  testRegex: '/test/.+\\.test\\.jsx?$',
   verbose: false,
 }

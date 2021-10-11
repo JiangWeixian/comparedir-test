@@ -15,9 +15,7 @@ export const compare = async (input: string, target: string, _options?: any) => 
     }),
   )
   if (inputFiles.length !== targetFiles.length) {
-    // TODO: throw error
-    console.error('input target files count not match')
-    return false
+    throw new Error('input total files count not match target')
   }
   for (const inputFilePath of inputFiles) {
     const targetFilePath = path.resolve(target, inputFilePath)
