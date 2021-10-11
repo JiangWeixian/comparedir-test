@@ -1,8 +1,7 @@
 name: Release
 on:
   push:
-    branches:
-      - release
+    branches: [master, release]
 env:
   CI: true
 jobs:
