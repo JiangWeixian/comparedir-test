@@ -20,11 +20,7 @@
     "build": "rimraf lib && rollup -c --silent",
     "lint:fix": "eslint . --fix",
     "dev": "rollup -c -w --silent",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "pretest": "yarn run build",
-    "update": "yarn update && yarn update --save-dev",
-    "check": "yarn outdated && npm outdated --save-dev",
-    "release": "yarn run build && np --no-cleanup --yolo --no-publish --any-branch"
+    "test": "pnpm run build && node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"

@@ -11,7 +11,7 @@ import fs from 'fs'
 export const compare = async (input: string, target: string, _options?: any) => {
   const [inputFiles, targetFiles] = await Promise.all(
     [input, target].map((cwd) => {
-      return globby(['*'], { cwd, gitignore: true })
+      return globby(['**'], { cwd, gitignore: true })
     }),
   )
   if (inputFiles.length !== targetFiles.length) {
@@ -20,12 +20,12 @@ export const compare = async (input: string, target: string, _options?: any) => 
   for (const inputFilePath of inputFiles) {
     const targetFilePath = path.resolve(target, inputFilePath)
     if (!fs.existsSync(targetFilePath)) {
-      return false
+      throw new Error('target file not exit')
     }
     const inputBuffer = fs.readFileSync(path.resolve(input, inputFilePath))
     const targetBuffer = fs.readFileSync(targetFilePath)
     if (!inputBuffer.equals(targetBuffer)) {
-      return false
+      throw new Error('input file content not match target file')
     }
   }
   return true
