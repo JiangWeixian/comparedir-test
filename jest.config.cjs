@@ -9,6 +9,7 @@ module.exports = {
   resetMocks: true,
   resetModules: true,
   restoreMocks: true,
+  bail: Infinity,
   globals: {
     'ts-jest': {
       diagnostics: false,

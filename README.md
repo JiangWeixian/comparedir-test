@@ -21,6 +21,13 @@ it('file content not match should return false', async () => {
 })
 ```
 
+<div align='center'>
+
+![files-count](./snapshots/files-count.png)  
+*▲ files-count*
+
+</div>
+
 ### `compare files content`
 
 ```ts
@@ -32,3 +39,10 @@ it('file content&count match should return true', async () => {
   await compare(...fixtures('basic'), {})
 })
 ```
+
+<div align='center'>
+
+![files-content](./snapshots/files-content.png)  
+*▲ files-content*
+
+</div>

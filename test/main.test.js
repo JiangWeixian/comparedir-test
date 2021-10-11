@@ -12,10 +12,11 @@ const fixtures = (type) => [
 describe('compare dir', () => {
   it.todo('glob should contain hidden files')
   it.todo('glob should contain dynamic files')
-  // it('files count not match should return false', async () => {
-  //   await compare(...fixtures('files-count-not-match'), {})
-  // })
+  it('files count not match should return false', async () => {
+    await compare(...fixtures('files-count-not-match'), {})
+  })
   it('file content not match should return false', async () => {
+    expect.assertions(1)
     await compare(...fixtures('files-content-not-match'), {})
   })
   it('file content&count match should return true', async () => {
