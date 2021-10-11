@@ -2,23 +2,33 @@ name: Node.js CI
 
 on:
   push:
-    branches: [master]
+    branches: [master,release]
   pull_request:
-    branches: [master]
+    branches: [master,release]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    name: Rollup template
 
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout code repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn
-      - run: yarn test
+      - name: Install pnpm
+        run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6
+      - name: Install 
+        run: |
+          pnpm install --frozen-lockfile=false
+      - name: Test
+        run: |
+          pnpm test
