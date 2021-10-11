@@ -1,6 +1,7 @@
 import { globby } from 'globby'
 import path from 'path'
 import fs from 'fs'
+import { toMatchFile } from 'jest-file-snapshot'
 
 /**
  * compare input and target dir is same or not
@@ -9,23 +10,35 @@ import fs from 'fs'
  * @param _options
  */
 export const compare = async (input: string, target: string, _options?: any) => {
+  if ('expect' in global) {
+    expect.extend({ toMatchFile });
+  }
   const [inputFiles, targetFiles] = await Promise.all(
     [input, target].map((cwd) => {
       return globby(['**'], { cwd, gitignore: true })
     }),
   )
   if (inputFiles.length !== targetFiles.length) {
-    throw new Error('input total files count not match target')
+    if ('expect' in global) {
+      expect(inputFiles.length).toBe(targetFiles.length)
+    }
+    return false
   }
   for (const inputFilePath of inputFiles) {
     const targetFilePath = path.resolve(target, inputFilePath)
     if (!fs.existsSync(targetFilePath)) {
-      throw new Error('target file not exit')
+      if ('expect' in global) {
+        expect(fs.existsSync(targetFilePath)).toBe(true)
+      }
+      return false
     }
     const inputBuffer = fs.readFileSync(path.resolve(input, inputFilePath))
     const targetBuffer = fs.readFileSync(targetFilePath)
+    if ('expect' in global) {
+      expect(inputBuffer.toString()).toMatchFile(targetFilePath);
+    }
     if (!inputBuffer.equals(targetBuffer)) {
-      throw new Error('input file content not match target file')
+      return false
     }
   }
   return true

@@ -1,24 +1,34 @@
-# @aiou/rollup-template
-*rollup-template for single lib*
+# comparedir-test
+*compare dir in jest*
 
-[![npm](https://img.shields.io/npm/v/@aiou/rollup-template)](https://github.com/JiangWeixian/templates/tree/master/packages/rollup-template) [![GitHub](https://img.shields.io/npm/l/@aiou/rollup-template)](https://github.com/JiangWeixian/templates/tree/master/packages/rollup-template) [![stackblitz](https://img.shields.io/badge/%E2%9A%A1%EF%B8%8Fstackblitz-online-blue)](https://stackblitz.com/github/JiangWeixian/templates/tree/master/packages/rollup-template)
+[![npm](https://img.shields.io/npm/v/comparedir-test)](https://github.com/JiangWeixian/comparedir-test) [![GitHub](https://img.shields.io/npm/l/comparedir-test)](https://github.com/JiangWeixian/comparedir-test)
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/github/JiangWeixian/templates/tree/master/packages/rollup-template)
-
-
-# features
-
-- output bundlesize
-- exclude `dependencies` and `peerDependencies`
-
-## install
+## usage
 
 ```console
-yarn add @aiou/rollup-template
+pnpm i comparedir-test
 ```
 
-## development
+### `compare files count`
 
-- **Setup** - `yarn * yarn dev`
-- **Build** - `yarn build`
+```ts
+const fixtures = (type) => [
+  path.resolve(__dirname, './fixtures', type, 'a'),
+  path.resolve(__dirname, './fixtures', type, 'b'),
+]
+it('file content not match should return false', async () => {
+  await compare(...fixtures('files-content-not-match'), {})
+})
+```
 
+### `compare files content`
+
+```ts
+const fixtures = (type) => [
+  path.resolve(__dirname, './fixtures', type, 'a'),
+  path.resolve(__dirname, './fixtures', type, 'b'),
+]
+it('file content&count match should return true', async () => {
+  await compare(...fixtures('basic'), {})
+})
+```
