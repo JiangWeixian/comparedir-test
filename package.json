@@ -16,7 +16,9 @@
   "files": [
     "lib"
   ],
-  "exports": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
   "module": "./lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
