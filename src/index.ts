@@ -15,7 +15,7 @@ export const compare = async (input: string, target: string, _options?: any) => 
   }
   const [inputFiles, targetFiles] = await Promise.all(
     [input, target].map((cwd) => {
-      return globby(['**'], { cwd, gitignore: true })
+      return globby(['**'], { cwd, gitignore: true, dot: true })
     }),
   )
   if (inputFiles.length !== targetFiles.length) {
