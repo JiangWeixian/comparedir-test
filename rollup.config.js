@@ -18,8 +18,8 @@ export default [
         resolve: ['.ts', '.js', '.tsx', '.jsx'],
         entries: [{ find: '@/', replacement: './src/' }],
       }),
-      bundlesize({ file: pkg.exports }),
+      bundlesize({ file: pkg.exports['.'] }),
     ],
-    output: [{ file: pkg.exports, format: 'es' }],
+    output: [{ file: pkg.exports['.'], format: 'es' }],
   },
 ]
