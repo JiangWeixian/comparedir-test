@@ -11,7 +11,9 @@ import { toMatchFile } from 'jest-file-snapshot'
  */
 export const compare = async (input: string, target: string, _options?: any) => {
   if ('expect' in global) {
-    expect.extend({ toMatchFile })
+    try {
+      expect.extend({ toMatchFile })
+    } catch (e) {}
   }
   const [inputFiles, targetFiles] = await Promise.all(
     [input, target].map((cwd) => {
