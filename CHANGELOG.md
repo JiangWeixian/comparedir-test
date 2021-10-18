@@ -1,5 +1,11 @@
 # comparedir-test
 
+## 1.0.3
+
+### Patch Changes
+
+- a466ea0: catch redefine error
+
 ## 1.0.2
 
 ### Patch Changes
