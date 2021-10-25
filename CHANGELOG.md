@@ -1,5 +1,11 @@
 # comparedir-test
 
+## 1.1.0
+
+### Minor Changes
+
+- c6dd249: use builtin ignore patterns
+
 ## 1.0.3
 
 ### Patch Changes
