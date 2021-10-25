@@ -2,6 +2,11 @@ import { globby } from 'globby'
 import path from 'path'
 import fs from 'fs'
 import { toMatchFile } from 'jest-file-snapshot'
+import ignorePatterns from '@aiou/eslint-ignore'
+
+export const glob = (cwd: string) => {
+  return globby(['**'], { cwd, gitignore: true, dot: true, ignore: ignorePatterns })
+}
 
 /**
  * compare input and target dir is same or not
@@ -17,7 +22,7 @@ export const compare = async (input: string, target: string, _options?: any) => 
   }
   const [inputFiles, targetFiles] = await Promise.all(
     [input, target].map((cwd) => {
-      return globby(['**'], { cwd, gitignore: true, dot: true })
+      return glob(cwd)
     }),
   )
   if (inputFiles.length !== targetFiles.length) {
