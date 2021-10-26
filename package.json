@@ -24,6 +24,7 @@
     "lint:fix": "eslint . --fix",
     "dev": "rollup -c -w --silent",
     "test": "pnpm run build && node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:update": "pnpm run build && node --experimental-vm-modules node_modules/jest/bin/jest.js --updateSnapshot",
     "ci:snapshot": "pnpx changeset version --snapshot beta",
     "ci:prerelease": "pnpm run build && pnpx changeset publish --tag beta",
     "ci:version": "pnpx changeset version",

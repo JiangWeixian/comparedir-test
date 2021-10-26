@@ -10,8 +10,8 @@ export const glob = (cwd: string) => {
 
 /**
  * compare input and target dir is same or not
- * @param input dir path
- * @param target snapshot dir path
+ * @param input current dir path
+ * @param target expected snapshot dir path
  * @param _options
  */
 export const compare = async (input: string, target: string, _options?: any) => {
