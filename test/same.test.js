@@ -1,4 +1,4 @@
-import { compare } from '../lib/index.js'
+import { isSameDir } from '../lib/index.js'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -9,18 +9,14 @@ const fixtures = (type) => [
   path.resolve(__dirname, './fixtures', type, 'b'),
 ]
 
-describe('compare dir', () => {
-  it('glob should work', async () => {
-    await compare(...fixtures(path.resolve(__dirname, './fixtures')))
-  })
+describe('is same dir', () => {
   it('files count not match should return false', async () => {
-    await compare(...fixtures('files-count-not-match'), {})
+    expect(await isSameDir(...fixtures('files-count-not-match'))).toBe(false)
   })
   it('file content not match should return false', async () => {
-    expect.assertions(1)
-    await compare(...fixtures('files-content-not-match'), {})
+    expect(await isSameDir(...fixtures('files-content-not-match'))).toBe(false)
   })
   it('file content&count match should return true', async () => {
-    await compare(...fixtures('basic'), {})
+    expect(await isSameDir(...fixtures('basic'))).toBe(true)
   })
 })
