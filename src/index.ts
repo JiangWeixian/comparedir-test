@@ -38,6 +38,28 @@ export const isSameDir = async (input: string, target: string, _options?: any) =
   return true
 }
 
+function toExit(
+  this: { snapshotState: { _updateSnapshot: string } },
+  inputFilePath: string,
+  targetFilePath: string,
+): any {
+  if ('expect' in global) {
+    if (this.snapshotState._updateSnapshot === 'new') {
+      return {
+        pass: fs.existsSync(targetFilePath),
+        message: () => `Expect received file ${targetFilePath} not exited`,
+      }
+    } else if (this.snapshotState._updateSnapshot === 'all') {
+      const inputBuffer = fs.readFileSync(inputFilePath)
+      expect(inputBuffer.toString()).toMatchFile(targetFilePath)
+      return {
+        pass: true,
+        message: () => `Update ${inputFilePath}`,
+      }
+    }
+  }
+}
+
 /**
  * compare input and target dir is same or not
  * @param input current dir path
@@ -48,6 +70,7 @@ export const compare = async (input: string, target: string, _options?: any) => 
   if ('expect' in global) {
     try {
       expect.extend({ toMatchFile })
+      expect.extend({ toExit: toExit as any })
     } catch (e) {}
   }
   const [inputFiles] = await Promise.all(
@@ -56,13 +79,15 @@ export const compare = async (input: string, target: string, _options?: any) => 
     }),
   )
   for (const inputFilePath of inputFiles) {
-    const targetFilePath = path.resolve(target, inputFilePath)
-    const inputBuffer = fs.readFileSync(path.resolve(input, inputFilePath))
+    const abTargetFilePath = path.resolve(target, inputFilePath)
+    const abInputFilePath = path.resolve(input, inputFilePath)
     if ('expect' in global) {
-      if (!fs.existsSync(targetFilePath)) {
-        expect(fs.existsSync(targetFilePath)).toBe(true)
+      if (!fs.existsSync(abTargetFilePath)) {
+        ;(expect(abInputFilePath) as any).toExit(abTargetFilePath)
+      } else {
+        const inputBuffer = fs.readFileSync(abInputFilePath)
+        expect(inputBuffer.toString()).toMatchFile(abTargetFilePath)
       }
-      expect(inputBuffer.toString()).toMatchFile(targetFilePath)
     }
   }
   return true
