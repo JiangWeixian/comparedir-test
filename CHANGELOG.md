@@ -1,5 +1,11 @@
 # comparedir-test
 
+## 1.2.0
+
+### Minor Changes
+
+- b1c72df: support updatesnapshot and pure dir compare
+
 ## 1.1.0
 
 ### Minor Changes
